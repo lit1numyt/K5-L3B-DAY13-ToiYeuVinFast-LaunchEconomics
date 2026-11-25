@@ -22,4 +22,15 @@ Nhóm số n chấm nhóm số n + 1; nhóm cuối chấm nhóm 1. Chấm theo b
 2. Khi phát hiện từ 1 ca hoàn trùng trở lên thì ai làm gì, và trong bao lâu? Ngày quyết định của pilot là ngày nào?
 3. Nếu chỉ có 20 nhân viên đủ điều kiện như trong mẫu thì chia 10 + 10, tối đa chỉ được 500 mẫu hiệu dụng, thấp hơn 859 cần có. Phương án dự phòng của nhóm là gì?
 
-**Câu trả lời của đội trình (ghi lại tại buổi):** Chưa có câu trả lời.
+**Câu trả lời của đội trình (ghi lại tại buổi):**
+
+1. **Về độ trễ 10 ngày và vế "KHÔNG THÌ" chặn chuyển bậc.** Luật an toàn của nhóm có vế "KHÔNG THÌ" chặn việc chuyển bậc rõ ràng. Cụ thể, luật dừng an toàn quy định: "NẾU tỷ lệ mở lại trong 7 ngày của nhánh trợ lý vượt 6% hoặc cao hơn đối chứng từ 2 điểm phần trăm TRONG 3 lần rà hằng ngày liên tiếp trên các yêu cầu đủ 7 ngày theo dõi ở cả hai nhánh THÌ Giám đốc vận hành tắt trợ lý trong 30 phút KHÔNG THÌ giữ bước hiện tại cho đến khi hoàn tất rà an toàn". Đồng thời, luật dừng số 4 cũng chốt chặn: "KHÔNG THÌ chỉ chuyển bước sau khi điều kiện an toàn và chi phí đạt". Dù mỗi bậc rollout dự kiến diễn ra trong 1 tuần, vế "KHÔNG THÌ giữ bước hiện tại..." cấm hệ thống tự động nhảy từ 10% lên 25–50% khi chưa hoàn tất chu kỳ theo dõi 7 ngày và 3 ngày rà liên tiếp (tối thiểu 10 ngày). Bậc 10% bắt buộc phải giữ nguyên cho đến khi dữ liệu theo dõi 7 ngày của bậc đó vượt qua toàn bộ các lần rà an toàn.
+
+2. **Xử lý sự cố hoàn trùng và ngày quyết định của pilot.** Khi phát hiện từ 1 ca hoàn trùng trở lên trong bất kỳ lần đối soát hằng ngày nào:
+   - *Ai làm gì:* Giám đốc vận hành LogiX-VN thực hiện tắt trợ lý qua cờ cấu hình trong 30 phút, chuyển toàn bộ yêu cầu mới và yêu cầu đang chờ về luồng nhân viên xử lý thủ công (rollback), đồng thời giao bộ phận Kế toán đối soát toàn bộ các bút toán hoàn tiền.
+   - *Ngày quyết định (decision date):* Là ngày thứ 8 sau yêu cầu cuối cùng của mẫu phân tích chính (ngày lịch cụ thể sẽ được chốt trước khi khởi động). Mốc này được chọn vì chỉ số chính yêu cầu theo dõi cửa sổ mở lại trong đủ 7 ngày; đến ngày thứ 8 dữ liệu mới đóng băng hoàn toàn để chạy phân tích hiệu quả chính một lần duy nhất.
+
+3. **Phương án dự phòng khi chỉ có 20 nhân viên (10 + 10, tối đa 500 mẫu hiệu dụng).** Với 10 nhân viên mỗi nhánh, trần cỡ mẫu hiệu dụng là c / ICC = 10 / 0,02 = 500, không thể đạt 859 để nhận biết mức chênh 6 điểm ở Power 80%. Nhóm xử lý theo các phương án:
+   - *Bảo vệ trạng thái No-go tại Gate 2a:* Đợt thử trước mới chạy ở 6 depot nên chỉ có 20 nhân viên. Toàn mạng lưới LogiX-VN có 12 depot với khoảng 40 nhân viên CSKH. Nhóm giữ đề xuất No-go cho đến khi Giám đốc vận hành xác nhận và huy động đủ 40 nhân viên (20 người/nhánh) từ mạng lưới 12 depot với cam kết sản lượng tối thiểu 299 yêu cầu/người.
+   - *Phương án dự phòng kỹ thuật nếu chỉ có 20 người:* Nhóm buộc phải tính lại cỡ mẫu và trình cấp thẩm quyền ký chấp nhận đánh đổi thống kê — nới lỏng MDE lên mức cao hơn (khoảng 8–9 điểm phần trăm thay vì 6 điểm) để với 500 mẫu hiệu dụng vẫn giữ được Power 80%; hoặc nếu giữ MDE 6 điểm thì phải chấp nhận rủi ro Power sụt giảm sâu (dưới 60%).
+   - *Tái ước lượng thực tế:* Trước khi phân tích, nhóm tiến hành kiểm đếm mẫu thực tế theo từng nhân viên, tính lại cỡ mẫu hiệu dụng nếu bị thiếu hụt hoặc lệch cụm và báo cáo kết quả kèm khoảng tin cậy mở rộng thay vì đưa ra kết luận khẳng định sai lầm.
