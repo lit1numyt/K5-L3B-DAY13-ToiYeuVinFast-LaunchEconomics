@@ -45,6 +45,20 @@ Sao chép mục dưới đây cho từng thành viên.
 
 ### Bằng chứng
 
+## NguyenDucKhuongLam-2A202604020
+
+### Phần việc phụ trách
+
+- Người gắn nhãn 1 (P3): gắn nhãn 20 ca lỗi ở CP3 và đối chiếu với P4 sau khi chốt hai bộ nhãn.
+
+### Đóng góp cụ thể
+
+- Rà và chốt 20 nhãn. Đối chiếu với P4, trùng 20/20 ca.
+
+### Bằng chứng
+
+- [Báo cáo cá nhân](report/team/2A202604020_NguyenDucKhuongLam.md), [bảng đối chiếu nhãn](report/team/bang_loi.md).
+
 ## DongHuuNguyenKhoa-2A202604000
 
 ### Phần việc phụ trách
