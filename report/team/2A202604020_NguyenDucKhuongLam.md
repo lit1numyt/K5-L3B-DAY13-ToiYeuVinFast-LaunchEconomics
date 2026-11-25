@@ -4,8 +4,7 @@
 
 - Họ tên: Nguyễn Đức Khương Lam
 - MSSV: 2A202604020
-- Nhóm: ToiYeuVinFast (L3B)
-- GitHub: `RachalHys`
+- Email: khuonglam.ai@gmail.com
 - Vai trong nhóm: P3, người gắn nhãn 1
 
 ## 2. Phần việc phụ trách
@@ -19,33 +18,8 @@
 
 ## 4. Bằng chứng
 
-- Bộ 20 nhãn P3 đã chốt tại [commit `5527354`](https://github.com/lit1numyt/K5-L3B-DAY13-ToiYeuVinFast-LaunchEconomics/commit/5527354).
+- Chốt bộ 20 nhãn trước khi đối chiếu với P4. [Bộ nhãn và căn cứ từng ca tại `5527354`](https://github.com/lit1numyt/K5-L3B-DAY13-ToiYeuVinFast-LaunchEconomics/blob/5527354/report/team/2A202604020_NguyenDucKhuongLam.md)
 - Kết quả đối chiếu đã được merge vào `main` tại `a8f97f2`. [PR #10](https://github.com/lit1numyt/K5-L3B-DAY13-ToiYeuVinFast-LaunchEconomics/pull/10), [bảng đối chiếu nhãn](bang_loi.md).
-
-### Bộ nhãn CP3
-
-| Ca | Nhãn | Căn cứ |
-| ---: | --- | --- |
-| 1 | Do người dùng | Khách nhập số tài khoản thiếu hai chữ số. |
-| 2 | Hệ thống | Tool tra giá nhận tham số hàng thường cho kiện 28 kg, dẫn tới hoàn thiếu. |
-| 3 | Ngữ cảnh | Tiền được hoàn vào ví đúng thiết kế. Khách chờ tiền về ngân hàng. |
-| 4 | Giới hạn hệ thống | LogiX thiếu dữ liệu của chặng do hãng nước ngoài giao. |
-| 5 | Ngầm | Hoàn theo giá trước giảm và chỉ phát hiện khi kiểm tra mẫu. |
-| 6 | Do người dùng | Khách chọn mục giao trễ cho yêu cầu về hàng bị vỡ. |
-| 7 | Hệ thống | Trợ lý báo đã hoàn dù ghi sổ cái thất bại sau ba lần thử. |
-| 8 | Hệ thống | Trợ lý viện dẫn một điều khoản không có trong chính sách hiện hành. |
-| 9 | Do người dùng | Khách nhập mã đơn sàn vào trường yêu cầu mã vận đơn. |
-| 10 | Ngữ cảnh | Từ chối đúng điều khoản bất khả kháng. Cam kết hiển thị tạo kỳ vọng hoàn phí. |
-| 11 | Giới hạn hệ thống | Trợ lý chưa xử lý được tin nhắn thoại. |
-| 12 | Ngầm | Chi phí token của D05 tăng gấp ba suốt ba tuần mà không ai phát hiện. |
-| 13 | Giới hạn hệ thống | Hoàn phí bảo hiểm thuộc sản phẩm đối tác, ngoài phạm vi trợ lý. |
-| 14 | Do người dùng | Khách bấm xác nhận đã nhận tiền khi tiền chưa về. |
-| 15 | Hệ thống | Trợ lý tính hoàn 100% thay vì 50% theo chính sách. Nhân viên phát hiện trước khi gửi. |
-| 16 | Ngữ cảnh | Trợ lý gửi ngay theo thiết kế vào 2:14 sáng, thời điểm khách thấy bị làm phiền. |
-| 17 | Ngầm | Bảng giá cũ làm sai tiền hoàn ở 212 đơn trong chín ngày và khách không mở lại. |
-| 18 | Ngữ cảnh | Tiền hoàn đúng chính sách. Thiếu cách tính nên khách tưởng bị hoàn thiếu. |
-| 19 | Giới hạn hệ thống | Đơn 14 tháng vượt quá cửa sổ dữ liệu 12 tháng. |
-| 20 | Hệ thống | Lệnh hoàn thứ hai thiếu khóa chống trùng, dẫn đến hoàn hai lần. |
 
 ## 5. Công cụ AI đã dùng
 
@@ -56,6 +30,7 @@ Dùng OpenAI Codex trong repo nhóm.
 | Đọc đề (CP3) | Rà yêu cầu và rubric của nhiệm vụ C. | Đối chiếu năm loại lỗi và điều kiện gắn nhãn với đề gốc và `RULES.md`. |
 | Gắn nhãn (CP3) | Đề xuất 20 nhãn và căn cứ theo mô tả ca. | P3 rà từng nhãn và căn cứ, xác nhận chốt trước khi so với P4. |
 | Đối chiếu (CP3) | So hai cột nhãn và tổng hợp số ca trùng. | Đối chiếu 20 cặp nhãn trong `bang_loi.md` với commit chốt nhãn và kiểm tra kết quả trên PR đã merge. |
+| Báo cáo cá nhân (CP5) | Soát cách trình bày và gắn link bằng chứng. | Kiểm tra đủ 6 mục theo mẫu, đối chiếu các số với `bang_loi.md` và PR #10. |
 
 Codex đã đọc bảng nhãn tham khảo trước khi đề xuất. Cần đọc kết quả khớp bảng tham khảo cùng với giới hạn này.
 
