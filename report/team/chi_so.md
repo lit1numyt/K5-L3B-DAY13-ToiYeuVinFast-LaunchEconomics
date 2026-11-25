@@ -44,5 +44,5 @@ Viết "chỉ số trong đợt chạy thử là …", không viết "trợ lý 
 
 | Rủi ro | Tác động đã tính | Dấu hiệu theo dõi | Hành động | Người phụ trách |
 | --- | --- | --- | --- | --- |
-| ... | ... | ... | ... | ... |
-| ... | ... | ... | ... | ... |
+| Số ca làm lại tăng gấp đôi | Chi phí tăng 51,8% lên 6.787 đ/việc thành công simulated, so với 4.472 đ simulated | Theo dõi tỉ lệ làm lại và chi phí mỗi tuần | Rà soát trace làm lại, xử lý nguyên nhân và cân nhắc thu hẹp phạm vi | PM trợ lý hoàn phí |
+| Phải xem lại toàn bộ yêu cầu có lần chạy thành công trong phạm vi | 11.743 đ/việc simulated (0,98 lần 12.000 đ); nếu làm lại 15,3 phút/ca: 12.415 đ simulated (1,03 lần) | Theo dõi tỉ lệ và thời gian xem lại, thời gian làm lại thực tế mỗi tuần | Đo thời gian thực và giảm xem lại theo bậc khi dữ liệu an toàn cho phép | Trưởng nhóm CSKH |
