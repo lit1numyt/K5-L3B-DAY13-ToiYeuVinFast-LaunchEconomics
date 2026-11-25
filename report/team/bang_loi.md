@@ -49,8 +49,8 @@ Cách phát hiện phải đo được (event, ngưỡng, tần suất). Ngườ
 
 | Ca | Loại lỗi | Phát hiện bằng gì | Khắc phục thế nào | Ai phụ trách |
 | --: | --- | --- | --- | --- |
-| ... | Do người dùng | ... | ... | ... |
-| ... | Hệ thống | ... | ... | ... |
-| ... | Ngữ cảnh | ... | ... | ... |
-| ... | Giới hạn hệ thống | ... | ... | ... |
-| ... | Ngầm | ... | ... | ... |
+| 6 | Do người dùng | `refund_request_created` có mục đã chọn khác loại suy ra từ mô tả (vd. chọn giao trễ, mô tả hàng vỡ), nối `ticket_reopened` qua trace_id; cảnh báo khi > 2% yêu cầu/tuần | Trợ lý so mục đã chọn với nội dung mô tả; lệch thì hỏi lại khách "Bạn muốn khiếu nại hàng hư hỏng?" trước khi từ chối | PM trợ lý hoàn phí |
+| 20 | Hệ thống | Đối soát mỗi giờ: hai `refund_ledger_write` ok cho cùng request_id; ngưỡng 0 ca, có ca là dừng gửi tiền tự động | Bắt buộc `idempotency_key` theo request_id cho mọi lệnh hoàn; yêu cầu gửi lại trong 24 giờ nối vào ticket cũ | Kỹ sư trưởng agent |
+| 16 | Ngữ cảnh | Số phản ánh "làm phiền" trên tin nhắn gửi 22:00–07:00, theo tuần; ngưỡng > 0,5% tin nhắn đêm | Gom tin nhắn hoàn tiền ban đêm, gửi lúc 07:00; vẫn ghi sổ ngay để tiền về đúng hạn | Trưởng nhóm CSKH |
+| 11 | Giới hạn hệ thống | `handoff_to_staff` với reason = dau_vao_khong_ho_tro (thoại, ảnh), đếm theo ngày và theo kênh | Báo rõ trợ lý chỉ đọc chữ, gợi ý mẫu câu ngắn hoặc chuyển nhân viên kèm tệp thoại; không để khách tự gõ lại từ đầu | PM trợ lý hoàn phí |
+| 5 | Ngầm | `audit_sample_checked` 100 đơn/tuần, lọc riêng đơn có mã giảm giá; ngưỡng 1% đơn có so_tien_da_hoan ≠ so_tien_dung | Tool tính hoàn dùng giá sau giảm; thêm phép thử đơn có mã giảm giá vào bộ kiểm tra trước mỗi lần đổi prompt hoặc bảng giá | Kế toán trưởng |
