@@ -32,7 +32,11 @@ pilot:
     unit: "staff"
     control_share: 0.5
     randomized: true
-  rollout: [0.10, 0.25, 0.50]     # mỗi bước một tuần: 4 → 10 → 20 nhân viên; chỉ đo chỉ số chính ở bước 0.50
+  rollout: [0.10, 0.25, 0.50]     # 4 → 10 → 20 nhân viên; bước 0.10 (từ 07/12) và 0.25 (từ 14/12) mỗi bước một tuần
+  # Bước 0.50 bắt đầu 21/12 và không giới hạn một tuần: chạy đến khi mỗi nhân viên đủ 299 yêu cầu trong phạm vi
+  # (khoảng 10 ngày làm việc, dự kiến đến 04/01/2027, đã trừ ngày nghỉ 01/01), rồi theo dõi đủ 7 ngày mở lại → 11/01/2027.
+  # Thiếu mẫu thì kéo dài bước 0.50; ngày quyết định = ngày người cuối cùng đủ 299 yêu cầu + 7 ngày, Giám đốc vận hành công bố.
+  # Chỉ đo chỉ số chính ở bước 0.50; trong thời gian kéo dài chỉ xem chỉ số an toàn.
   primary_metric:
     name: dong_trong_24h_khong_mo_lai_7_ngay
     baseline: 0.70
@@ -47,7 +51,8 @@ pilot:
     spillover_risk: "Trung bình: nhân viên cùng depot chia sẻ câu trả lời; giảm bằng khoá trợ lý theo tài khoản và đếm agent_suggestion_shown theo staff_id ở nhóm đối chứng (phải bằng 0)"
     predeclared: "Chỉ số chính, mde 0,06, luật dừng và ngày quyết định chốt trong file này trước 2026-12-07"
   stop_rules:
-    - "NẾU tỉ lệ mở lại 7 ngày của nhóm trợ lý cao hơn đối chứng từ 2 điểm hoặc vượt 6%, hoặc có từ 1 ca hoàn trùng TRONG 3 ngày liên tiếp THÌ Giám đốc vận hành tắt trợ lý trong 30 phút và chuyển toàn bộ về nhân viên tự làm KHÔNG THÌ không được sang bước rollout tiếp theo"
+    - "NẾU tỉ lệ mở lại 7 ngày của nhóm trợ lý cao hơn đối chứng từ 2 điểm hoặc vượt 6% TRONG 3 ngày liên tiếp THÌ Giám đốc vận hành tắt trợ lý trong 30 phút và chuyển toàn bộ về nhân viên tự làm KHÔNG THÌ không được sang bước rollout tiếp theo"
+    - "NẾU đối soát sổ cái phát hiện từ 1 ca hoàn trùng (hai refund_ledger_write ok cho cùng request_id) TRONG 1 lần đối soát mỗi giờ, không chờ cửa sổ 3 ngày, THÌ dừng gửi tiền tự động ngay, Giám đốc vận hành tắt trợ lý trong 30 phút và Kỹ sư trưởng agent tìm nguyên nhân, thu hồi khoản trùng trước khi bật lại KHÔNG THÌ tiếp tục đối soát mỗi giờ"
     - "NẾU chi phí mỗi việc thành công trong phạm vi, gồm chi phí cố định, vượt 6.000 đ (hiện 4.599 đ, simulated) TRONG 2 tuần liên tiếp THÌ PM trợ lý hoàn phí thu hẹp về noi_dia và giới hạn 2 lần chạy KHÔNG THÌ không được mở thêm hang_nang hay depot"
     - "NẾU tỉ lệ bỏ qua gợi ý (sửa + bỏ) vượt 40% (đợt chạy thử 27,12%) TRONG 1 tuần THÌ Trưởng nhóm CSKH phỏng vấn 5 nhân viên trong 3 ngày và báo PM KHÔNG THÌ không được chuyển bước rollout"
   interim_looks: "chỉ kiểm tra chỉ số an toàn"
@@ -57,4 +62,4 @@ pilot:
     - "phut_xem_lai_simulated, phut_lam_lai_simulated (logix_requests.csv)"
     - "Chi phí mỗi việc thành công theo loại A3: noi_dia 2.696 đ, hang_nang 8.221 đ, quoc_te 22.515 đ, doi_tac 10.215 đ"
     - "Chi phí trong phạm vi gồm cố định 4.599 đ/việc ở 45.000 yêu cầu/tháng (A4)"
-    - "Ngưỡng chi phí 6.000 đ trong luật dừng 2"
+    - "Ngưỡng chi phí 6.000 đ trong luật dừng 3 (luật chi phí)"
