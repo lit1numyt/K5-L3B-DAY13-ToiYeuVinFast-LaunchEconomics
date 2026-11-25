@@ -49,10 +49,10 @@ Tổng hợp từ bốn báo cáo cá nhân; chi tiết và bằng chứng trong
 
 | Thành viên | Vai | Đóng góp chính | Công cụ AI |
 | --- | --- | --- | --- |
-| Chu Nguyen Tung Duong (2A202604016) | P1 · Người viết code | Ba hàm A1, mô hình A2, A3 theo loại, kịch bản B1–B4; điền số và đề xuất trong hồ sơ launch (PR #1, #3, #5, #8, #13, #16) | Codex |
+| Chu Nguyen Tung Duong (2A202604016) | P1 · Người viết code | Ba hàm A1, mô hình A2, A3 theo loại, kịch bản B1–B4; điền số và đề xuất trong hồ sơ launch (PR #1, #3, #4, #5, #8, #13, #16) | Codex |
 | Tu Huy Bao (2A202604021) | P2 · Người kiểm số | Tính tay yêu cầu RF-70000 (12.262,694 đ, simulated) để đối chiếu A2; điền và đối chiếu B1–B4; ba chỉ số E1; hai rủi ro E2; kiểm tra lại kết quả D1 (PR #7, #14) | Codex |
 | Nguyen Duc Khuong Lam (2A202604020) | P3 · Người gắn nhãn 1 | Bộ nhãn người 1 kèm căn cứ từng ca, chốt trước khi đối chiếu; bảng đối chiếu và tỉ lệ đồng thuận 20/20 (PR #10, #15) | Codex |
-| Dong Huu Nguyen Khoa (2A202604000) | P4 · Người gắn nhãn 2, kiêm giữ hồ sơ | Bộ nhãn người 2; bảng khắc phục 5 ca; code D1 và `pilot_plan.yaml`; khung hồ sơ, 10 event và kiểm tra chéo chỉ số; tổng hợp báo cáo nhóm (PR #2, #6, #11, #12) | Claude Code |
+| Dong Huu Nguyen Khoa (2A202604000) | P4 · Người gắn nhãn 2, kiêm giữ hồ sơ | Bộ nhãn người 2; bảng khắc phục 5 ca; code D1 và `pilot_plan.yaml`; khung hồ sơ, 10 event và kiểm tra chéo chỉ số; tổng hợp báo cáo nhóm (PR #2, #6, #9, #11, #12) | Claude Code |
 
 Mọi con số trong hồ sơ do `src/lab13.py` tính hoặc tính tay có ghi cách tính; mỗi thành viên ghi cách tự kiểm tra kết quả AI trong mục 5 báo cáo cá nhân.
 
