@@ -120,6 +120,42 @@ def xem_lai_tat_ca(runs, reqs, phut_lam_lai=9):
     return mo_hinh(runs, pham_vi)
 
 
+# ---------- Nhiệm vụ D1 · Cỡ mẫu pilot ----------
+def co_mau(p1, p2, alpha=0.05, power=0.8):
+    """Cỡ mẫu mỗi nhóm khi so hai tỉ lệ (công thức trong docs/du_lieu_va_cong_thuc.md)."""
+    from statistics import NormalDist
+    za, zb = NormalDist().inv_cdf(1 - alpha / 2), NormalDist().inv_cdf(power)
+    pb = (p1 + p2) / 2
+    return math.ceil((za * math.sqrt(2 * pb * (1 - pb))
+                      + zb * math.sqrt(p1 * (1 - p1) + p2 * (1 - p2))) ** 2 / (p2 - p1) ** 2)
+
+
+def he_so_thiet_ke(m, icc=0.02):
+    """DE = 1 + (m − 1) × ICC, m là số yêu cầu mỗi cụm."""
+    return 1 + (m - 1) * icc
+
+
+def m_toi_thieu(n_can, so_cum, icc=0.02):
+    """Số yêu cầu tối thiểu mỗi cụm để c·m / DE ≥ n_can; None nếu không thể (n_can ≥ c / ICC)."""
+    mau = so_cum - n_can * icc
+    return None if mau <= 0 else math.ceil(n_can * (1 - icc) / mau)
+
+
+def bang_co_mau(baseline=0.70, muc_tieu=0.05, icc=0.02):
+    """Năm câu D1."""
+    n = co_mau(baseline, baseline + muc_tieu)
+    de_b = he_so_thiet_ke(75, icc)
+    n6 = co_mau(baseline, baseline + 0.06)
+    m_e = m_toi_thieu(n6, 20, icc)
+    return dict(
+        a_theo_yeu_cau=n,
+        b_de=de_b, b_n=math.ceil(n * de_b), b_nguoi_moi_nhom=math.ceil(n * de_b / 75),
+        c_toi_da_20_nguoi=20 / icc,
+        d_toi_da_6_depot=6 / icc,
+        e_n_6_diem=n6, e_m=m_e, e_de=he_so_thiet_ke(m_e, icc),
+    )
+
+
 if __name__ == '__main__':
     runs = pd.read_csv('logix_runs.csv')
     reqs = pd.read_csv('logix_requests.csv', keep_default_na=False)
@@ -159,6 +195,23 @@ if __name__ == '__main__':
         ket_qua = xem_lai_tat_ca(runs, reqs, phut_lam_lai=phut)
         print(f"Lam lai {phut} phut/ca: {ket_qua['cps']:,.0f} d/viec thanh cong; "
               f"{ket_qua['cps'] / BASELINE:.2f} lan 12,000 d")
-    # TODO CP4 · Nhiệm vụ D: cỡ mẫu.
-    #   from statsmodels.stats.proportion import proportion_effectsize
-    #   from statsmodels.stats.power import NormalIndPower
+
+    # CP4 · Nhiệm vụ D: cỡ mẫu.
+    from statsmodels.stats.proportion import proportion_effectsize
+    from statsmodels.stats.power import NormalIndPower
+    d1 = bang_co_mau()
+    print('\nD1: co mau (baseline 0,70; +5 diem; alpha 0,05; power 0,8; ICC 0,02)')
+    print(f"a) Theo yeu cau: {d1['a_theo_yeu_cau']:,} yeu cau moi nhom")
+    print(f"b) Theo nhan vien, m=75: DE {d1['b_de']:.2f}; {d1['b_n']:,} moi nhom = "
+          f"{d1['b_nguoi_moi_nhom']} nguoi moi nhom, tong {2 * d1['b_nguoi_moi_nhom']} > 40 nhan vien")
+    print(f"c) 20 nhan vien moi nhom: toi da {d1['c_toi_da_20_nguoi']:,.0f} < {d1['a_theo_yeu_cau']:,}")
+    print(f"d) 6 depot moi nhom: toi da {d1['d_toi_da_6_depot']:,.0f}")
+    print(f"e) Chenh 6 diem ({d1['e_n_6_diem']} moi nhom), 20 nguoi moi nhom: "
+          f"m >= {d1['e_m']} yeu cau moi nguoi; DE {d1['e_de']:.2f}")
+    es5 = proportion_effectsize(0.75, 0.70)
+    power5 = NormalIndPower().power(effect_size=es5, nobs1=d1['e_n_6_diem'], alpha=0.05)
+    print(f"Power neu tac dong that chi 5 diem voi n={d1['e_n_6_diem']}: {power5:.2f}")
+    pham_vi = reqs['loai'].isin(['noi_dia', 'hang_nang'])
+    print(f"mo_lai_trong_7_ngay hien tai: {reqs['mo_lai_trong_7_ngay'].mean():.2%} "
+          f"({reqs['mo_lai_trong_7_ngay'].sum()}/{len(reqs)}); "
+          f"noi_dia + hang_nang: {reqs.loc[pham_vi, 'mo_lai_trong_7_ngay'].mean():.2%}")
